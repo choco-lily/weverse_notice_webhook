@@ -1,0 +1,30 @@
+{
+  "name": "weverse_notice_webhook",
+  "version": "1.0.0",
+  "description": "A Node.js script to monitor Weverse notices and send Discord webhooks.",
+  "main": "monitor.js",
+  "scripts": {
+    "start": "node monitor.js",
+    "dev": "node monitor_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bunniesnu/weverse-api.git"
+  },
+  "keywords": [
+    "weverse",
+    "webhook",
+    "discord",
+    "monitor"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bunniesnu/weverse-api/issues"
+  },
+  "homepage": "https://github.com/bunniesnu/weverse-api#readme",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3"
+  }
+}

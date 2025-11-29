@@ -1,0 +1,44 @@
+name: Weverse Notice Monitor
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # Run every 10 minutes
+  workflow_dispatch: # Allow manual run
+
+jobs:
+  check-notices:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit state.json
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Monitor
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          APP_ID: ${{ secrets.APP_ID }}
+          HMAC_KEY: ${{ secrets.HMAC_KEY }}
+        run: node monitor.js
+
+      - name: Commit and Push State
+        run: |
+          git config --global user.name '${{ secrets.BOT_NAME }}'
+          git config --global user.email '${{ secrets.BOT_EMAIL }}'
+          if [ -f state.json ]; then
+            git add state.json
+            git diff --quiet && git diff --staged --quiet || (git commit -m "Update state.json" && git push)
+          else
+            echo "state.json not found, skipping commit."
+          fi
