@@ -1,6 +1,8 @@
 name: Cleanup Old Runs
 on:
-  workflow_dispatch: # 버튼 클릭으로 실행
+  schedule:
+    - cron: '*/1440 * * * *' # Run every 24 hours
+  workflow_dispatch: # Allow manual run
 
 permissions:
   actions: write
