@@ -5,7 +5,8 @@
   "main": "monitor.js",
   "scripts": {
     "start": "node monitor.js",
-    "dev": "node monitor_test.js"
+    "dev": "node monitor_test.js",
+    "rss": "node rss.js"
   },
   "repository": {
     "type": "git",
