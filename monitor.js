@@ -142,7 +142,7 @@ async function sendWebhook(noticeDetail) {
 
     try {
         await axios.post(WEBHOOK_URL, {
-            content: `Weverse Notice: ${noticeDetail.title} @everyone`,
+            content: `Weverse Notice: ${noticeDetail.title}`,
             embeds: embeds
         });
         console.log('Webhook sent for notice:', noticeDetail.noticeId);
